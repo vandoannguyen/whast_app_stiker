@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.MainActivity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvStickerAdded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_below="@+id/rvStickerAdded"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtCredits"
+            android:autoLink="web"
+            android:layout_margin="20dp"
+            android:id="@+id/infoTxtCredits"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:linksClickable="true"/>
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="15dp"
+        android:id="@+id/imgAdd"
+        android:src="@drawable/rss_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+</RelativeLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtFile"
+                    android:text="Background Changer"
+                    android:layout_margin="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/txtNumber"
+                    android:layout_margin="10dp"
+                    android:text="2 sticker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="80dp"
+            android:layout_height="50dp">
+            <Button
+                android:text="ADD"
+                android:id="@+id/btnADD"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/imgDone"
+                android:src="@drawable/ic_check_primary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_marginTop="10dp"
+        android:background="@color/colorGrey"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+</LinearLayout>
