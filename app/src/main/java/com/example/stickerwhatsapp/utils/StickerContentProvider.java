@@ -10,7 +10,6 @@ package com.example.stickerwhatsapp.utils;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.UriMatcher;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
@@ -35,7 +34,7 @@ import java.util.Objects;
 public class StickerContentProvider extends ContentProvider {
     private static final String TAG = "StickerContentProvider";
     /**
-     * Do not change the strings listed below, as these are used by WhatsApp. And changing these will break the interface between sticker app and WhatsApp.
+     * Do not change the strings listed below, as these are used by WhatsApp. And changing these will break the notifiimg between sticker app and WhatsApp.
      */
     public static final String STICKER_PACK_IDENTIFIER_IN_QUERY = "sticker_pack_identifier";
     public static final String STICKER_PACK_NAME_IN_QUERY = "sticker_pack_name";

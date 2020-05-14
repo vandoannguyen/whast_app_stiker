@@ -52,6 +52,10 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <FrameLayout
+        android:id="@+id/frameDetail"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp">
@@ -65,5 +69,17 @@
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnDeleteToWhatApp"
+            android:text="DELETE TO WHATSAPP"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorRed"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
     </RelativeLayout>
 </LinearLayout>

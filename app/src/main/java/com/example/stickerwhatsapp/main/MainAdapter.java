@@ -43,7 +43,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
     public void onBindViewHolder(@NonNull MainHolder mainHolder, int position) {
         imageFolder mainModel = mMain.get(position);
         mainHolder.nameFolder.setText(mainModel.getFolderName());
-        mainHolder.numSticker.setText(mainModel.getNumberOfPics() + " stickers");
+        mainHolder.numSticker.setText(mainModel.getNumberOfPics()+" stickers");
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 mainHolder.rvItem.getContext(),
                 LinearLayoutManager.HORIZONTAL,

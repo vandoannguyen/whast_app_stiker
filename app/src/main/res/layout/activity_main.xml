@@ -1,41 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main.MainActivity">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvStickerAdded"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
     <RelativeLayout
-        android:layout_below="@+id/rvStickerAdded"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:text="WhatsApp Sticker"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="22sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMain"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txtCredits"
-            android:autoLink="web"
-            android:layout_margin="20dp"
-            android:id="@+id/infoTxtCredits"
-            android:layout_centerInParent="true"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_weight="1"
+                android:id="@+id/rvMain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_below="@id/rvMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txtCredits"
+                android:autoLink="web"
+                android:textColor="@color/colorRed"
+                android:id="@+id/infoTxtCredits"
+                android:layout_gravity="center"
+                android:linksClickable="true"/>
+        </LinearLayout>
+        <ImageView
             android:layout_alignParentBottom="true"
-            android:linksClickable="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
+            android:id="@+id/imgAdd"
+            android:src="@drawable/rss_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
     </RelativeLayout>
-
-
-    <ImageView
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="15dp"
-        android:id="@+id/imgAdd"
-        android:src="@drawable/rss_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"/>
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/frameMain"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+</LinearLayout>

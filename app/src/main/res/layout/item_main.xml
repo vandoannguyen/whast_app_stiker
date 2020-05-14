@@ -22,9 +22,15 @@
                     android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+                <ImageView
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_fiber_manual"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"/>
                 <TextView
                     android:id="@+id/txtNumber"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
                     android:text="2 sticker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -39,15 +45,15 @@
             android:layout_marginRight="20dp"
             android:layout_width="80dp"
             android:layout_height="50dp">
-            <Button
-                android:text="ADD"
-                android:id="@+id/btnADD"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+<!--            <Button-->
+<!--                android:text="ADD"-->
+<!--                android:id="@+id/btnADD"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"/>-->
             <ImageView
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/imgDone"
-                android:src="@drawable/ic_check_primary"
+                android:src="@drawable/next"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </RelativeLayout>

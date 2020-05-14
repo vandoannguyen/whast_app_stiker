@@ -6,7 +6,6 @@ package com.example.stickerwhatsapp.utils;
  * Custom class for holding data of images on the device external storage
  */
 public class pictureFacer {
-
     private String picturName;
     private String picturePath;
     private String pictureSize;

@@ -46,6 +46,12 @@ public class ItemChooseAdapter extends RecyclerView.Adapter {
                 .apply(new RequestOptions().centerCrop())
                 .into(holder1.imgSub);
         Log.e(TAG, "onBindViewHolder: "+uriImage );
+        holder1.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickListener.onClickItem(position);
+            }
+        });
 
     }
     public class ViewHolder extends RecyclerView.ViewHolder{

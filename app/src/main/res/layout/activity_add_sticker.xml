@@ -75,9 +75,19 @@
         android:background="@color/colorGrey"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_margin="10dp"
             android:id="@+id/rvImageChoose"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/frameAdd"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
 </LinearLayout>
