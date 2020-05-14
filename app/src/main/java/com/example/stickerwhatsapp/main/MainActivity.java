@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.example.ratedialog.RatingDialog;
 import com.example.stickerwhatsapp.R;
 import com.example.stickerwhatsapp.add.AddStickerActivity;
 import com.example.stickerwhatsapp.detail.DetailGalleryActivity;
+import com.example.stickerwhatsapp.utils.MediaScannerWrapper;
 import com.example.stickerwhatsapp.utils.SharedPrefsUtils;
 import com.example.stickerwhatsapp.utils.StickerBook;
 import com.example.stickerwhatsapp.utils.StickerPack;
@@ -37,8 +40,17 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -62,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
     @BindView(R.id.infoTxtCredits)
     TextView infoTxtCredits;
     FrameLayout frameMain;
+    ImageView btnSearch;
     ProgressDialog progressDialog;
     private InterstitialAd mInterstitialAd;
     private AdRequest adRequest;
@@ -69,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 //        if (ContextCompat.checkSelfPermission(MainActivity.this,
 //                Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -76,9 +90,7 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
 //            ActivityCompat.requestPermissions(MainActivity.this,
 //                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
 //                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-        if (!checkRecordAndStoragePermission()) {
-            requestRecordAndStoragePermission();
-        }
+
         rateAuto();
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Loading");
@@ -88,11 +100,19 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
         adRequest = new AdRequest.Builder().build();
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         ButterKnife.bind(this);
-        //SD Card
         initView();
         initAds();
     }
     private void initView(){
+        btnSearch = findViewById(R.id.btnSearch);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                browserIntent.setData(Uri.parse("http://www.google.com"));
+                startActivity(browserIntent);
+            }
+        });
         mainModels = getPicturePaths();
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -103,43 +123,45 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
             @Override
             public void onClickItem(int position) {
                 progressDialog.show();
-                for (int i = 0; i < allpictures.size(); i++) {
-                    Uri uriImg = Uri.fromFile(new File(allpictures.get(i).getPicturePath()));
-                    uriList.add(uriImg);
-                    Log.e(TAG, "onClickItem: " + uriImg);
-                }
+//                Log.e(TAG, "onClickItem: "+StickerBook.getAllStickerPacks().size() );
+//                for (int i = 0; i < mainModels.get(position).getNumberOfPics(); i++) {
+//                    Uri uriImg = Uri.fromFile(new File( mainModels.get(position).getSubItem().get(i).getPicturePath()));
+//                    uriList.add(uriImg);
+//                    Log.e(TAG, "onClickItem: " + uriImg);
+//                }
                 Random rn = new Random();
                 rand = rn.nextInt(11);
-                if (mInterstitialAd.isLoaded()) {
-                    createNewStickerPack(mainModels.get(position).getFolderName(), mainModels.get(position).getFolderName(), uriList.get(0), uriList, getApplicationContext());
-                    StickerPack sp = StickerBook.getStickerPackByName(mainModels.get(position).getFolderName());
+                //createNewStickerPack(mainModels.get(position).getFolderName(), mainModels.get(position).getFolderName(), uriList.get(0), uriList, getApplicationContext());
+                //StickerPack sp = StickerBook.getStickerPackByName(mainModels.get(position).getFolderName());
+                if (mInterstitialAd.isLoaded()){
                     if(rand < 8){
-                        progressDialog.dismiss();
                         mInterstitialAd.show();
+                        progressDialog.dismiss();
                         mInterstitialAd.setAdListener(new AdListener(){
                             @Override
                             public void onAdClosed(){
                                 super.onAdClosed();
-                                onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
+                                onPicClicked(mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
+                                //onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
                             }
                         });
                     }
                     else{
                         progressDialog.dismiss();
-                        onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
+                        onPicClicked(mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
+                        //onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
                     }
 
                 } else {
-                    createNewStickerPack(mainModels.get(position).getFolderName(), mainModels.get(position).getFolderName(), uriList.get(0), uriList, getApplicationContext());
-                    StickerPack sp = StickerBook.getStickerPackByName(mainModels.get(position).getFolderName());
                     progressDialog.dismiss();
-                    onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
+                    onPicClicked(mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
+                    //onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
                     mInterstitialAd.loadAd(adRequest);
                 }
-
             }
         });
     }
+
     private void initAds() {
         frameMain = findViewById(R.id.frameMain);
         AdView adView = new AdView(this);
@@ -254,8 +276,8 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
     }
 
     public void onPicClicked(StickerPack sp, String pictureFolderPath, String folderName, int numberFolder) {
-        final ProgressDialog pd = ProgressDialog.show(this,
-                "", "Loading", true);
+//        final ProgressDialog pd = ProgressDialog.show(this,
+//                "", "Loading", true);
         Intent move = new Intent(this, DetailGalleryActivity.class);
         new Thread(new Runnable() {
             public void run() {
@@ -264,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
                 move.putExtra("folderName", folderName);
                 move.putExtra("number", numberFolder);
                 startActivity(move);
-                pd.dismiss();
+                //pd.dismiss();
             }
         }).start();
 //        move.putExtra("sp", sp);
@@ -286,58 +308,10 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
         super.onBackPressed();
     }
 
-    private void requestRecordAndStoragePermission() {
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA
-        }, REQUEST_RECORD_STORAGE_PERMISSION);
-    }
 
-    private boolean checkRecordAndStoragePermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                &&
-                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
 
-                    // main logic
-                } else {
-                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            showMessageOKCancel("You need to allow access permissions",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                requestRecordAndStoragePermission();
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-                }
-                break;
-        }
-    }
 
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(MainActivity.this)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
-    }
     @OnClick({ R.id.infoTxtCredits, R.id.imgAdd})
     public void onViewClicked(View view) {
         switch (view.getId()) {

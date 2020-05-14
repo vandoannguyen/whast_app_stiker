@@ -63,7 +63,6 @@ public class StickerBook {
         }
         return null;
     }
-
     public static StickerPack getStickerPackById(String stickerPackId) {
         if (allStickerPacks.isEmpty()) {
             init(myContext);

@@ -1,11 +1,7 @@
 package com.example.stickerwhatsapp.utils;
-
-import android.net.Uri;
-
 import java.util.List;
 
 public class imageFolder {
-
     private String path;
     private String FolderName;
     private int numberOfPics = 0;

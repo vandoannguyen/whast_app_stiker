@@ -3,6 +3,7 @@ package com.example.stickerwhatsapp.detail;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -39,6 +40,8 @@ import com.google.android.gms.ads.InterstitialAd;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,7 +79,7 @@ public class DetailGalleryActivity extends AppCompatActivity {
     private WhiteListCheckAsyncTask whiteListCheckAsyncTask;
     private AdRequest adRequest;
     private InterstitialAd mInterstitialAd;
-
+    ArrayList<Uri> uriList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,10 +105,15 @@ public class DetailGalleryActivity extends AppCompatActivity {
         if (numberFile != 0) {
             txtNumFolder.setText("" + numberFile);
         }
-        stickerPack = StickerBook.getStickerPackByName(nameFolder);
-        Log.e(TAG, "onCreate: " + stickerPack);
         ArrayList<pictureFacer> listImg = getAllImagesByFolder(foldePath);
         Log.e(TAG, "onCreate: " + nameFolder);
+        for (int i = 0; i < numberFile; i++) {
+            Uri uriImg = Uri.fromFile(new File(listImg.get(i).getPicturePath()));
+            uriList.add(uriImg);
+            Log.e(TAG, "onClickItem: " + uriImg);
+        }
+        createNewStickerPack(nameFolder, nameFolder, uriList.get(0), uriList, getApplicationContext());
+        stickerPack = StickerBook.getStickerPackByName(nameFolder);
         rvDetailGallery.setLayoutManager(new GridLayoutManager(this, 4));
         detailGalleryAdapter = new DetailGalleryAdapter(listImg);
         rvDetailGallery.setAdapter(detailGalleryAdapter);
@@ -152,6 +160,7 @@ public class DetailGalleryActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnBackDetailGallery:
+                //StickerBook.deleteStickerPackById(nameFolder);
                 onBackPressed();
                 break;
             case R.id.btnShareTwo:
@@ -183,6 +192,29 @@ public class DetailGalleryActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+    private void createNewStickerPack(String name, String creator, Uri trayImage, List<Uri> imageChildUri, Context context) {
+        String newId = UUID.randomUUID().toString();
+        StickerPack sp = new StickerPack(
+                newId,
+                name,
+                creator,
+                trayImage,
+                "",
+                "",
+                "",
+                "",
+                this);
+        for (Uri uri : imageChildUri) {
+            sp.addSticker(uri, context);
+        }
+        StickerBook.addStickerPackExisting(sp);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //StickerBook.deleteStickerPackById(stickerPack.getIdentifier());
+        super.onBackPressed();
     }
 
     private void addStickerPackToWhatsApp(StickerPack sp) {

@@ -19,6 +19,14 @@
             android:textSize="22sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:src="@drawable/ic_search"
+            android:layout_alignParentEnd="true"
+            android:paddingTop="15dp"
+            android:paddingRight="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_weight="1"
@@ -29,7 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_weight="1"
                 android:id="@+id/rvMain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
