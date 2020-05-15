@@ -43,6 +43,36 @@ public class LoadingActivity extends AppCompatActivity {
 
     }
     private boolean copyImgAsset() {
+        copyAsset("Sticker pack 6","bo400.png");
+        copyAsset("Sticker pack 6","bo401.png");
+        copyAsset("Sticker pack 6","bo402.png");
+        copyAsset("Sticker pack 6","bo403.png");
+        copyAsset("Sticker pack 6","bo404.png");
+        copyAsset("Sticker pack 6","bo405.png");
+        copyAsset("Sticker pack 6","bo406.png");
+        copyAsset("Sticker pack 5","bo300.png");
+        copyAsset("Sticker pack 5","bo301.png");
+        copyAsset("Sticker pack 5","bo302.png");
+        copyAsset("Sticker pack 5","bo303.png");
+        copyAsset("Sticker pack 5","bo304.png");
+        copyAsset("Sticker pack 5","bo306.png");
+        copyAsset("Sticker pack 5","bo3062.png");
+        copyAsset("Sticker pack 5","bo3063.png");
+        copyAsset("Sticker pack 5","bo307.png");
+        copyAsset("Sticker pack 5","bo3071.png");
+        copyAsset("Sticker pack 5","bo3072.png");
+        copyAsset("Sticker pack 5","bo308.png");
+        copyAsset("Sticker pack 4","00.png");
+        copyAsset("Sticker pack 4","001.png");
+        copyAsset("Sticker pack 4","002.png");
+        copyAsset("Sticker pack 4","003.png");
+        copyAsset("Sticker pack 4","004.png");
+        copyAsset("Sticker pack 4","005.png");
+        copyAsset("Sticker pack 4","006.png");
+        copyAsset("Sticker pack 3","bo201.png");
+        copyAsset("Sticker pack 3","bo202.png");
+        copyAsset("Sticker pack 3","bo203.png");
+        copyAsset("Sticker pack 3","bo204.png");
         copyAsset("Sticker pack 2","01.png");
         copyAsset("Sticker pack 2","02.png");
         copyAsset("Sticker pack 2","03.png");
@@ -119,14 +149,12 @@ public class LoadingActivity extends AppCompatActivity {
                 &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case REQUEST_RECORD_STORAGE_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
-                    // main logic
                 } else {
                     Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -142,7 +170,6 @@ public class LoadingActivity extends AppCompatActivity {
                 break;
         }
     }
-
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(LoadingActivity.this)
                 .setMessage(message)

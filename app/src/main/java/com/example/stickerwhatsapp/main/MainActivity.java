@@ -82,15 +82,7 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-//        if (ContextCompat.checkSelfPermission(MainActivity.this,
-//                Manifest.permission.READ_EXTERNAL_STORAGE)
-//                != PackageManager.PERMISSION_GRANTED)
-//            ActivityCompat.requestPermissions(MainActivity.this,
-//                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-//                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-
         rateAuto();
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Loading");
@@ -205,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
                         if (picFolders.get(i).getPath().equals(folderpaths)) {
                             picFolders.get(i).setFirstPic(datapath);
                             picFolders.get(i).addpics();
-
                         }
                     }
                 }
@@ -217,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
         }
         return picFolders;
     }
-
     public ArrayList<pictureFacer> getAllImagesByFolder(String path, String folder) {
         ArrayList<pictureFacer> images = new ArrayList<>();
         Uri allVideosuri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
@@ -301,17 +291,11 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
         move.putExtra("folderPath", pictureFolderPath);
         startActivity(move);
     }
-
     @Override
     public void onBackPressed() {
         finish();
         super.onBackPressed();
     }
-
-
-
-
-
     @OnClick({ R.id.infoTxtCredits, R.id.imgAdd})
     public void onViewClicked(View view) {
         switch (view.getId()) {

@@ -160,7 +160,6 @@ public class DetailGalleryActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnBackDetailGallery:
-                //StickerBook.deleteStickerPackById(nameFolder);
                 onBackPressed();
                 break;
             case R.id.btnShareTwo:

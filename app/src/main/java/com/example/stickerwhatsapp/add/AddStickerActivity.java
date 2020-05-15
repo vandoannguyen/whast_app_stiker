@@ -195,9 +195,7 @@ public class AddStickerActivity extends AppCompatActivity {
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
     }
-
     public ArrayList<pictureFacer> getAllImagesByFolder(String path) {
         ArrayList<pictureFacer> images = new ArrayList<>();
         Uri allVideosuri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
@@ -297,7 +295,6 @@ public class AddStickerActivity extends AppCompatActivity {
                         onBackPressed();
                         mInterstitialAd.loadAd(adRequest);
                     }
-
                 }
                 break;
         }
@@ -417,34 +414,5 @@ public class AddStickerActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         super.onBackPressed();
-    }
-
-    private File saveBitmap(Bitmap bitmap, String path) {
-        File file = null;
-        if (bitmap != null) {
-            file = new File(path);
-            try {
-                FileOutputStream outputStream = null;
-                try {
-                    outputStream = new FileOutputStream(path); //here is set your file path where you want to save or also here you can set file object directly
-
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream); // bitmap is your Bitmap instance, if you want to compress it you can compress reduce percentage
-                    // PNG is a lossless format, the compression factor (100) is ignored
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        if (outputStream != null) {
-                            outputStream.close();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return file;
     }
 }
