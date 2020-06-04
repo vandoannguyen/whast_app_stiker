@@ -115,30 +115,22 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
             @Override
             public void onClickItem(int position) {
                 progressDialog.show();
-//                Log.e(TAG, "onClickItem: "+StickerBook.getAllStickerPacks().size() );
-//                for (int i = 0; i < mainModels.get(position).getNumberOfPics(); i++) {
-//                    Uri uriImg = Uri.fromFile(new File( mainModels.get(position).getSubItem().get(i).getPicturePath()));
-//                    uriList.add(uriImg);
-//                    Log.e(TAG, "onClickItem: " + uriImg);
-//                }
                 Random rn = new Random();
                 rand = rn.nextInt(11);
-                //createNewStickerPack(mainModels.get(position).getFolderName(), mainModels.get(position).getFolderName(), uriList.get(0), uriList, getApplicationContext());
-                //StickerPack sp = StickerBook.getStickerPackByName(mainModels.get(position).getFolderName());
-                if (mInterstitialAd.isLoaded()){
-                    if(rand < 8){
+                if (mInterstitialAd.isLoaded()) {
+                    progressDialog.dismiss();
+                    if (rand < 8) {
                         mInterstitialAd.show();
-                        progressDialog.dismiss();
-                        mInterstitialAd.setAdListener(new AdListener(){
+                        mInterstitialAd.setAdListener(new AdListener() {
                             @Override
-                            public void onAdClosed(){
+                            public void onAdClosed() {
+                                progressDialog.dismiss();
                                 super.onAdClosed();
                                 onPicClicked(mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
                                 //onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
                             }
                         });
-                    }
-                    else{
+                    } else {
                         progressDialog.dismiss();
                         onPicClicked(mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
                         //onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
@@ -149,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
                     onPicClicked(mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
                     //onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
                     mInterstitialAd.loadAd(adRequest);
+
                 }
             }
         });

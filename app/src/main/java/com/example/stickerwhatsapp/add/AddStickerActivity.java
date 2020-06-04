@@ -267,7 +267,9 @@ public class AddStickerActivity extends AppCompatActivity {
                                             }
                                         }
                                     }
-                                    onBackPressed();
+                                    finish();
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent);
                                 }
                             });
                     } else {
@@ -292,7 +294,9 @@ public class AddStickerActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                        onBackPressed();
+                        finish();
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
                         mInterstitialAd.loadAd(adRequest);
                     }
                 }
@@ -395,7 +399,6 @@ public class AddStickerActivity extends AppCompatActivity {
         uCrop.withOptions(getCropOptions());
         uCrop.start(this);
     }
-
     private UCrop.Options getCropOptions() {
         UCrop.Options options = new UCrop.Options();
         //Compress Type
@@ -407,12 +410,9 @@ public class AddStickerActivity extends AppCompatActivity {
         options.setAllowedGestures(UCropActivity.ALL, UCropActivity.ALL, UCropActivity.ALL);
         return options;
     }
-
     @Override
     public void onBackPressed() {
-        finish();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+
         super.onBackPressed();
     }
 }

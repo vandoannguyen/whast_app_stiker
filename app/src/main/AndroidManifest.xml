@@ -23,7 +23,6 @@
         <activity
             android:name=".detail.DetailGalleryActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".detail.DetailStickerActivity" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

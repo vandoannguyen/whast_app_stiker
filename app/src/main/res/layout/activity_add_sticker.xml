@@ -23,11 +23,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:fontFamily="@font/font"
                 android:id="@+id/edtPackName"
                 android:hint="Sticker pack name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <EditText
+                android:fontFamily="@font/font"
                 android:id="@+id/edtAuthor"
                 android:hint="Author(optional)"
                 android:layout_width="match_parent"
@@ -47,6 +49,7 @@
         <TextView
             android:layout_centerInParent="true"
             android:id="@+id/txtTapOn"
+            android:fontFamily="@font/font"
             android:text="Tap on icons below to add them to sticker pack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
