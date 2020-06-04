@@ -75,7 +75,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center"
                     android:gravity="center"/>
-                <com.example.ratedialog.RotationRatingBar
+                <stickermaker.wastickerapps.ratedialog.RotationRatingBar
                     android:id="@+id/rotationratingbar_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                     android:layout_marginTop="16dp"
                    >
 
-                </com.example.ratedialog.RotationRatingBar>
+                </stickermaker.wastickerapps.ratedialog.RotationRatingBar>
 
 
 

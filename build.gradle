@@ -19,6 +19,13 @@ allprojects {
         google()
         jcenter()
         maven {url "https://jitpack.io"}
+        maven {
+            url "http://167.71.205.74:8081/artifactory/libs-release-local"
+            credentials {
+                username = "nmtien92"
+                password = "AP2C2BNch86Hzu8S2gYdeaNNQjS"
+            }
+        }
     }
 }
 
