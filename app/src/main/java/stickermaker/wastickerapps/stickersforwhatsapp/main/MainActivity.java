@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
     ArrayList<Uri> uriList = new ArrayList<>();
     @BindView(R.id.infoTxtCredits)
     TextView infoTxtCredits;
-    FrameLayout frameMain;
+    //FrameLayout frameMain;
     ImageView btnSearch;
     ProgressDialog progressDialog;
     private InterstitialAd mInterstitialAd;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         ButterKnife.bind(this);
         initView();
-        initAds();
+        //initAds();
     }
     private void initView(){
         btnSearch = findViewById(R.id.btnSearch);
@@ -98,48 +98,42 @@ public class MainActivity extends AppCompatActivity implements RatingDialog.Rati
         mainAdapter.setOnClickListener(new MainAdapter.OnClickListener() {
             @Override
             public void onClickItem(int position) {
-                progressDialog.show();
                 Random rn = new Random();
                 rand = rn.nextInt(11);
+                progressDialog.show();
                 if (mInterstitialAd.isLoaded()) {
-                    progressDialog.dismiss();
                     if (rand < 8) {
                         mInterstitialAd.show();
                         mInterstitialAd.setAdListener(new AdListener() {
                             @Override
                             public void onAdClosed() {
-                                progressDialog.dismiss();
                                 super.onAdClosed();
                                 onPicClicked(mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
-                                //onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
+                                progressDialog.dismiss();
                             }
                         });
                     } else {
-                        progressDialog.dismiss();
                         onPicClicked(mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
-                        //onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
+                        progressDialog.dismiss();
                     }
 
                 } else {
-                    progressDialog.dismiss();
                     onPicClicked(mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
-                    //onPicClicked(sp, mainModels.get(position).getPath(), mainModels.get(position).getFolderName(), mainModels.get(position).getNumberOfPics());
                     mInterstitialAd.loadAd(adRequest);
-
+                    progressDialog.dismiss();
                 }
             }
         });
     }
-
-    private void initAds() {
-        frameMain = findViewById(R.id.frameMain);
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId(Common.bannerId);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
-        frameMain.addView(adView);
-    }
+//    private void initAds() {
+//        frameMain = findViewById(R.id.frameMain);
+//        AdView adView = new AdView(this);
+//        adView.setAdSize(AdSize.BANNER);
+//        adView.setAdUnitId(Common.bannerId);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        adView.loadAd(adRequest);
+//        frameMain.addView(adView);
+//    }
     private ArrayList<imageFolder> getPicturePaths() {
         ArrayList<imageFolder> picFolders = new ArrayList<>();
         ArrayList<String> picPaths = new ArrayList<>();

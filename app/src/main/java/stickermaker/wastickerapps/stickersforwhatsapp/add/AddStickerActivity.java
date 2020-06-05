@@ -232,13 +232,13 @@ public class AddStickerActivity extends AppCompatActivity {
                 showAlertDialog();
                 break;
             case R.id.btnCheck:
-                progressDialog.show();
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
                 if (edtAuthor.getText().toString().isEmpty() && edtPackName.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Sticker null", Toast.LENGTH_SHORT).show();
                 } else if (imgListChoosed.size() == 0 || imgListChoosed.size() < 3 || imgListChoosed.size() > 30) {
                     Toast.makeText(this, "You need choose 3 sticker", Toast.LENGTH_SHORT).show();
                 } else {
+                    progressDialog.show();
                     if (mInterstitialAd.isLoaded()) {
                             mInterstitialAd.show();
                             mInterstitialAd.setAdListener(new AdListener(){
@@ -269,6 +269,7 @@ public class AddStickerActivity extends AppCompatActivity {
                                     finish();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
+                                    progressDialog.dismiss();
                                 }
                             });
                     } else {

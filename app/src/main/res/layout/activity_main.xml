@@ -30,7 +30,6 @@
             android:layout_height="50dp"/>
     </RelativeLayout>
     <RelativeLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -55,14 +54,14 @@
         <ImageView
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="15dp"
+            android:layout_margin="20dp"
             android:id="@+id/imgAdd"
             android:src="@drawable/plus"
             android:layout_width="50dp"
             android:layout_height="50dp"/>
     </RelativeLayout>
-    <FrameLayout
-        android:id="@+id/frameMain"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"/>
+<!--    <FrameLayout-->
+<!--        android:id="@+id/frameMain"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"/>-->
 </LinearLayout>

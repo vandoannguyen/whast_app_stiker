@@ -8,8 +8,8 @@ android {
         minSdkVersion 21
         multiDexEnabled true
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // Adds a new field for the authority to the BuildConfig class.
         def contentProviderAuthority = applicationId + ".stickercontentprovider"
